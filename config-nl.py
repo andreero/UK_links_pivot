@@ -16,6 +16,9 @@ class Config():
         "Follow": "true|false"
     }
 
+    # Merge index cells (True) or write the text into each column (False)
+    merge_output_cells = False
+
     # logging
     logger = logging.getLogger('Pivot_table_script')
     logger.setLevel(logging.DEBUG)
