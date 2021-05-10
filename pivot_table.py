@@ -56,9 +56,11 @@ def filter_dataframe(dataframe: DataFrame, config) -> DataFrame:
     # drop empty columns
     dataframe = dataframe.dropna(how='all', axis=1)
     # Filter main column
-    dataframe = dataframe[~dataframe[config.main_column].str.contains(config.main_column_exclude, na=False)]
+    if config.main_column_exclude:
+        dataframe = dataframe[~dataframe[config.main_column].str.contains(config.main_column_exclude, na=False)]
     # Filter secondary column
-    dataframe = dataframe[~dataframe[config.main_column].str.contains(config.secondary_column_exclude, na=False)]
+    if config.secondary_column_exclude:
+        dataframe = dataframe[~dataframe[config.main_column].str.contains(config.secondary_column_exclude, na=False)]
 
     dataframe = dataframe.fillna('').astype(str)  # for string-based filtering
     for filter_column, filter_values in config.additional_filters.items():
