@@ -12,7 +12,7 @@ try:
     import numpy as np
     from pandas import DataFrame
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r' 'requirements.txt'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
     import pandas as pd
     import numpy as np
     from pandas import DataFrame
@@ -60,7 +60,7 @@ def filter_dataframe(dataframe: DataFrame, config) -> DataFrame:
         dataframe = dataframe[~dataframe[config.main_column].str.contains(config.main_column_exclude, na=False)]
     # Filter secondary column
     if config.secondary_column_exclude:
-        dataframe = dataframe[~dataframe[config.main_column].str.contains(config.secondary_column_exclude, na=False)]
+        dataframe = dataframe[~dataframe[config.secondary_column].str.contains(config.secondary_column_exclude, na=False)]
 
     dataframe = dataframe.fillna('').astype(str)  # for string-based filtering
     for filter_column, filter_values in config.additional_filters.items():
